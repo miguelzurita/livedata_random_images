@@ -14,9 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        val model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        var urlImage: MutableLiveData<String>? = model.callURLImage()
+        val urlImage: MutableLiveData<String>? = model.callURLImage()
 
         urlImage?.observe(this, Observer {
             Picasso.get().load(it)
