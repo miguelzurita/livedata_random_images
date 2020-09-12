@@ -14,8 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var model = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-
+        var model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
         var urlImage: MutableLiveData<String>? = model.callURLImage()
 
