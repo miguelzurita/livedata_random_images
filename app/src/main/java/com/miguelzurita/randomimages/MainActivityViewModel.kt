@@ -4,17 +4,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel : ViewModel() {
+
+    var size: MutableLiveData<String> = MutableLiveData<String>()
+
     private var urlImage: MutableLiveData<String>? = null
 
-    fun callURLImage(): MutableLiveData<String>? {
+    fun getURLImageLiveData(): MutableLiveData<String>? {
         if (urlImage == null) {
             urlImage = MutableLiveData()
-            randomNumbersURL()
+            changeRandomImage()
         }
         return urlImage
     }
 
-    fun randomNumbersURL() {
-        urlImage?.value = "https://picsum.photos/${(3..5).random()}00/${(3..5).random()}00"
+    fun changeRandomImage() {
+        val random = (3..5).random()
+        size.value = "Size ${random}"
+        urlImage?.value = "https://picsum.photos/${random}00/${random}00"
     }
 }

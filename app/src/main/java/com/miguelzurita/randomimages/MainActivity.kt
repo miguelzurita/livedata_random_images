@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -14,21 +13,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val model = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        val model: MainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
 
-        val urlImage: MutableLiveData<String>? = model.callURLImage()
+        val urlImage: MutableLiveData<String>? = model.getURLImageLiveData()
 
         urlImage?.observe(this, Observer {
             Picasso.get().load(it)
-                .into(imagePhoto)
+                    .into(imagePhoto)
 
             Picasso.get().load(it)
-                .into(imagePhoto2)
+                    .into(imagePhoto2)
         })
 
         btnGetURLImage.setOnClickListener {
-            model.randomNumbersURL()
+            model.changeRandomImage()
         }
 
+        model.size.observe(this, Observer {
+            textView.text = it
+        })
     }
 }
